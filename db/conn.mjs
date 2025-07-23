@@ -8,7 +8,7 @@ let conn;
 try {
   conn = await client.connect();
 } catch(e) {
-  console.error(e);
+  console.error('error conn', e);
 }
 
 let db = conn.db("recepe-book");

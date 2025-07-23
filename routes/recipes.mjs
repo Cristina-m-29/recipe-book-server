@@ -12,6 +12,15 @@ router.get("/", async (req, res) => {
   res.send(results).status(200);
 });
 
+router.get("/printable", async (req, res) => {
+  let collection = await db.collection("recipes");
+  const ids = req.query.ids.split(',').map((id) => ObjectId(id));
+  let query = {_id: { $in: ids }};
+  let results = await collection.find(query)
+    .toArray();
+  res.send(results).status(200);
+});
+
 // Fetches the latest 3 recipes
 router.get("/latest", async (req, res) => {
   let collection = await db.collection("recipes");
